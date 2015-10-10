@@ -7,14 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE6747CF1B8CCAE6003EBABF /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6747CE1B8CCAE6003EBABF /* RoundedTextField.swift */; };
+		CE6747D21B8CCB57003EBABF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6747D11B8CCB57003EBABF /* Constants.swift */; };
+		CE6747D51B8D6B84003EBABF /* PersonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6747D41B8D6B84003EBABF /* PersonCollectionViewCell.swift */; };
+		CE6747D71B8D809D003EBABF /* AvatarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6747D61B8D809D003EBABF /* AvatarCollectionViewController.swift */; };
+		CE6747D91B8D80CD003EBABF /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6747D81B8D80CD003EBABF /* AvatarCollectionViewCell.swift */; };
+		CE6747E61B8EF0F9003EBABF /* KidsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE6747E41B8EF0F9003EBABF /* KidsApp.xcdatamodeld */; };
+		CE6748271B8F0E84003EBABF /* DataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6748261B8F0E84003EBABF /* DataContext.swift */; };
+		CE6748291B8F1308003EBABF /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6748281B8F1308003EBABF /* DateHelper.swift */; };
+		CE6748351B8F6306003EBABF /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6748341B8F6306003EBABF /* Task.swift */; };
+		CE6748371B8F6306003EBABF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6748361B8F6306003EBABF /* User.swift */; };
+		CE67483D1B91E00B003EBABF /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67483C1B91E00B003EBABF /* Purchase.swift */; };
+		CE67483F1B91E022003EBABF /* UserTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67483E1B91E022003EBABF /* UserTask.swift */; };
+		CE6748411B91FD5E003EBABF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6748401B91FD5E003EBABF /* MainViewController.swift */; };
+		CE93E6EA1B9622EB00D9C907 /* CustomRenderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE93E6E91B9622EB00D9C907 /* CustomRenderDelegate.swift */; };
+		CE93E6EC1B96E45400D9C907 /* ScalarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE93E6EB1B96E45400D9C907 /* ScalarExtensions.swift */; };
+		CE9F45591B94954200D4ECD0 /* ResponsiveTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F45581B94954200D4ECD0 /* ResponsiveTextFieldViewController.swift */; };
+		CE9F455C1B94991200D4ECD0 /* OrientationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F455B1B94991200D4ECD0 /* OrientationExtension.swift */; };
+		CEA94A071B8AC95400209F92 /* CreatePersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA94A061B8AC95400209F92 /* CreatePersonViewController.swift */; };
+		CEA94A0A1B8B25D700209F92 /* FirstStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA94A091B8B25D700209F92 /* FirstStepViewController.swift */; };
+		CEA94A0C1B8B25E200209F92 /* SecondStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA94A0B1B8B25E200209F92 /* SecondStepViewController.swift */; };
+		CEA94A101B8B260A00209F92 /* ThirdStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA94A0F1B8B260A00209F92 /* ThirdStepViewController.swift */; };
+		CEA94A131B8B712100209F92 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA94A121B8B712100209F92 /* NextButton.swift */; };
+		CEA94A181B8C42FD00209F92 /* PersonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA94A171B8C42FD00209F92 /* PersonButton.swift */; };
+		CEA94A1A1B8C433A00209F92 /* UserTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA94A191B8C433A00209F92 /* UserTypePicker.swift */; };
+		CEA94A1D1B8C469900209F92 /* UserTypePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA94A1C1B8C469900209F92 /* UserTypePicker.xib */; };
+		CEA94A201B8C821800209F92 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA94A1F1B8C821800209F92 /* DataStore.swift */; };
+		CEC1383B1B94D2EE000B0C7A /* AddCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC1383A1B94D2EE000B0C7A /* AddCollectionViewCell.swift */; };
+		CEC1383D1B94D3CC000B0C7A /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC1383C1B94D3CC000B0C7A /* TasksViewController.swift */; };
+		CEC1383F1B94DAE5000B0C7A /* DeleteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC1383E1B94DAE5000B0C7A /* DeleteCollectionViewCell.swift */; };
+		CEC138411B954BCB000B0C7A /* TaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC138401B954BCB000B0C7A /* TaskCollectionViewCell.swift */; };
+		CEC138431B958136000B0C7A /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC138421B958136000B0C7A /* TaskTableViewCell.swift */; };
 		CED29D4D1B85002D00537C77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED29D4C1B85002D00537C77 /* AppDelegate.swift */; };
-		CED29D4F1B85002D00537C77 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED29D4E1B85002D00537C77 /* RootViewController.swift */; };
-		CED29D511B85002D00537C77 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED29D501B85002D00537C77 /* DataViewController.swift */; };
-		CED29D531B85002D00537C77 /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED29D521B85002D00537C77 /* ModelController.swift */; };
 		CED29D561B85002D00537C77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED29D541B85002D00537C77 /* Main.storyboard */; };
 		CED29D581B85002D00537C77 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED29D571B85002D00537C77 /* Images.xcassets */; };
 		CED29D5B1B85002D00537C77 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED29D591B85002D00537C77 /* LaunchScreen.xib */; };
 		CED29D671B85002D00537C77 /* KidsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED29D661B85002D00537C77 /* KidsAppTests.swift */; };
+		DCF607FFFDD03FCFB236116D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13DCAC7195F517869B7A9734 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,12 +57,44 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		13DCAC7195F517869B7A9734 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C69850790D581D2FCD56DD5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		BB9998A2E9113B298C91F85D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CE6747CE1B8CCAE6003EBABF /* RoundedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
+		CE6747D11B8CCB57003EBABF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CE6747D41B8D6B84003EBABF /* PersonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE6747D61B8D809D003EBABF /* AvatarCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewController.swift; sourceTree = "<group>"; };
+		CE6747D81B8D80CD003EBABF /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE6747E51B8EF0F9003EBABF /* KidsApp.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = KidsApp.xcdatamodel; sourceTree = "<group>"; };
+		CE6748261B8F0E84003EBABF /* DataContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataContext.swift; sourceTree = "<group>"; };
+		CE6748281B8F1308003EBABF /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		CE6748341B8F6306003EBABF /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		CE6748361B8F6306003EBABF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CE67483C1B91E00B003EBABF /* Purchase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Purchase.swift; sourceTree = "<group>"; };
+		CE67483E1B91E022003EBABF /* UserTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTask.swift; sourceTree = "<group>"; };
+		CE6748401B91FD5E003EBABF /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		CE93E6E91B9622EB00D9C907 /* CustomRenderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomRenderDelegate.swift; path = ../Extension/CustomRenderDelegate.swift; sourceTree = "<group>"; };
+		CE93E6EB1B96E45400D9C907 /* ScalarExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScalarExtensions.swift; sourceTree = "<group>"; };
+		CE9F45581B94954200D4ECD0 /* ResponsiveTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsiveTextFieldViewController.swift; sourceTree = "<group>"; };
+		CE9F455B1B94991200D4ECD0 /* OrientationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrientationExtension.swift; sourceTree = "<group>"; };
+		CEA94A061B8AC95400209F92 /* CreatePersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePersonViewController.swift; sourceTree = "<group>"; };
+		CEA94A091B8B25D700209F92 /* FirstStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstStepViewController.swift; sourceTree = "<group>"; };
+		CEA94A0B1B8B25E200209F92 /* SecondStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondStepViewController.swift; sourceTree = "<group>"; };
+		CEA94A0F1B8B260A00209F92 /* ThirdStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdStepViewController.swift; sourceTree = "<group>"; };
+		CEA94A121B8B712100209F92 /* NextButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
+		CEA94A141B8C05A200209F92 /* KidsApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KidsApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		CEA94A171B8C42FD00209F92 /* PersonButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonButton.swift; sourceTree = "<group>"; };
+		CEA94A191B8C433A00209F92 /* UserTypePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTypePicker.swift; sourceTree = "<group>"; };
+		CEA94A1C1B8C469900209F92 /* UserTypePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserTypePicker.xib; sourceTree = "<group>"; };
+		CEA94A1F1B8C821800209F92 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		CEC1383A1B94D2EE000B0C7A /* AddCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCollectionViewCell.swift; sourceTree = "<group>"; };
+		CEC1383C1B94D3CC000B0C7A /* TasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
+		CEC1383E1B94DAE5000B0C7A /* DeleteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteCollectionViewCell.swift; sourceTree = "<group>"; };
+		CEC138401B954BCB000B0C7A /* TaskCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCollectionViewCell.swift; sourceTree = "<group>"; };
+		CEC138421B958136000B0C7A /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		CED29D471B85002D00537C77 /* KidsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED29D4B1B85002D00537C77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CED29D4C1B85002D00537C77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CED29D4E1B85002D00537C77 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		CED29D501B85002D00537C77 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
-		CED29D521B85002D00537C77 /* ModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelController.swift; sourceTree = "<group>"; };
 		CED29D551B85002D00537C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CED29D571B85002D00537C77 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CED29D5A1B85002D00537C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -47,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCF607FFFDD03FCFB236116D /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +122,98 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		79B692E3D95DA169B22F1B55 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BB9998A2E9113B298C91F85D /* Pods.debug.xcconfig */,
+				3C69850790D581D2FCD56DD5 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CE6747D01B8CCB3D003EBABF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CE93E6E91B9622EB00D9C907 /* CustomRenderDelegate.swift */,
+				CE6747D11B8CCB57003EBABF /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CE6747D31B8D6B4A003EBABF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CE6747D41B8D6B84003EBABF /* PersonCollectionViewCell.swift */,
+				CE6747D81B8D80CD003EBABF /* AvatarCollectionViewCell.swift */,
+				CEC1383A1B94D2EE000B0C7A /* AddCollectionViewCell.swift */,
+				CEC1383E1B94DAE5000B0C7A /* DeleteCollectionViewCell.swift */,
+				CEC138401B954BCB000B0C7A /* TaskCollectionViewCell.swift */,
+				CEC138421B958136000B0C7A /* TaskTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		CE9F455A1B94970B00D4ECD0 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F455B1B94991200D4ECD0 /* OrientationExtension.swift */,
+				CE6748281B8F1308003EBABF /* DateHelper.swift */,
+				CE93E6EB1B96E45400D9C907 /* ScalarExtensions.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		CEA94A081B8B258800209F92 /* CreatePerson */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F45581B94954200D4ECD0 /* ResponsiveTextFieldViewController.swift */,
+				CEA94A061B8AC95400209F92 /* CreatePersonViewController.swift */,
+				CEA94A091B8B25D700209F92 /* FirstStepViewController.swift */,
+				CEA94A0B1B8B25E200209F92 /* SecondStepViewController.swift */,
+				CEA94A0F1B8B260A00209F92 /* ThirdStepViewController.swift */,
+				CE6747D61B8D809D003EBABF /* AvatarCollectionViewController.swift */,
+			);
+			path = CreatePerson;
+			sourceTree = "<group>";
+		};
+		CEA94A111B8B70E100209F92 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE6747D31B8D6B4A003EBABF /* Cells */,
+				CEA94A1B1B8C434300209F92 /* CreatePerson */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CEA94A1B1B8C434300209F92 /* CreatePerson */ = {
+			isa = PBXGroup;
+			children = (
+				CEA94A121B8B712100209F92 /* NextButton.swift */,
+				CEA94A171B8C42FD00209F92 /* PersonButton.swift */,
+				CEA94A191B8C433A00209F92 /* UserTypePicker.swift */,
+				CEA94A1C1B8C469900209F92 /* UserTypePicker.xib */,
+				CE6747CE1B8CCAE6003EBABF /* RoundedTextField.swift */,
+			);
+			path = CreatePerson;
+			sourceTree = "<group>";
+		};
+		CEA94A1E1B8C81E600209F92 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				CEA94A1F1B8C821800209F92 /* DataStore.swift */,
+				CE6748261B8F0E84003EBABF /* DataContext.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
 		CED29D3E1B85002D00537C77 = {
 			isa = PBXGroup;
 			children = (
 				CED29D491B85002D00537C77 /* KidsApp */,
 				CED29D631B85002D00537C77 /* KidsAppTests */,
 				CED29D481B85002D00537C77 /* Products */,
+				79B692E3D95DA169B22F1B55 /* Pods */,
+				E3A32B0321E8510C16FDA6B0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,14 +229,19 @@
 		CED29D491B85002D00537C77 /* KidsApp */ = {
 			isa = PBXGroup;
 			children = (
+				CE9F455A1B94970B00D4ECD0 /* Extension */,
+				CE6747D01B8CCB3D003EBABF /* Utils */,
+				CEA94A1E1B8C81E600209F92 /* Store */,
+				CEA94A111B8B70E100209F92 /* Views */,
+				CED29D7B1B85041800537C77 /* Controllers */,
+				CED29D761B8503AE00537C77 /* Model */,
 				CED29D4C1B85002D00537C77 /* AppDelegate.swift */,
-				CED29D4E1B85002D00537C77 /* RootViewController.swift */,
-				CED29D501B85002D00537C77 /* DataViewController.swift */,
-				CED29D521B85002D00537C77 /* ModelController.swift */,
 				CED29D541B85002D00537C77 /* Main.storyboard */,
 				CED29D571B85002D00537C77 /* Images.xcassets */,
 				CED29D591B85002D00537C77 /* LaunchScreen.xib */,
 				CED29D4A1B85002D00537C77 /* Supporting Files */,
+				CEA94A141B8C05A200209F92 /* KidsApp-Bridging-Header.h */,
+				CE6747E41B8EF0F9003EBABF /* KidsApp.xcdatamodeld */,
 			);
 			path = KidsApp;
 			sourceTree = "<group>";
@@ -118,6 +271,35 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CED29D761B8503AE00537C77 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE67483E1B91E022003EBABF /* UserTask.swift */,
+				CE6748361B8F6306003EBABF /* User.swift */,
+				CE6748341B8F6306003EBABF /* Task.swift */,
+				CE67483C1B91E00B003EBABF /* Purchase.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CED29D7B1B85041800537C77 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CEA94A081B8B258800209F92 /* CreatePerson */,
+				CE6748401B91FD5E003EBABF /* MainViewController.swift */,
+				CEC1383C1B94D3CC000B0C7A /* TasksViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E3A32B0321E8510C16FDA6B0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				13DCAC7195F517869B7A9734 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -125,9 +307,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CED29D6A1B85002D00537C77 /* Build configuration list for PBXNativeTarget "KidsApp" */;
 			buildPhases = (
+				4247C30368EA9FDD6C7DD3F0 /* Check Pods Manifest.lock */,
 				CED29D431B85002D00537C77 /* Sources */,
 				CED29D441B85002D00537C77 /* Frameworks */,
 				CED29D451B85002D00537C77 /* Resources */,
+				D0464CA7DB23158B59DCC6B6 /* Embed Pods Frameworks */,
+				3869CC008D08D2C0BB6CD640 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -200,6 +385,7 @@
 			files = (
 				CED29D561B85002D00537C77 /* Main.storyboard in Resources */,
 				CED29D5B1B85002D00537C77 /* LaunchScreen.xib in Resources */,
+				CEA94A1D1B8C469900209F92 /* UserTypePicker.xib in Resources */,
 				CED29D581B85002D00537C77 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,15 +399,90 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3869CC008D08D2C0BB6CD640 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4247C30368EA9FDD6C7DD3F0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D0464CA7DB23158B59DCC6B6 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CED29D431B85002D00537C77 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CED29D4F1B85002D00537C77 /* RootViewController.swift in Sources */,
-				CED29D531B85002D00537C77 /* ModelController.swift in Sources */,
-				CED29D511B85002D00537C77 /* DataViewController.swift in Sources */,
+				CE9F45591B94954200D4ECD0 /* ResponsiveTextFieldViewController.swift in Sources */,
+				CE6747E61B8EF0F9003EBABF /* KidsApp.xcdatamodeld in Sources */,
+				CE6748411B91FD5E003EBABF /* MainViewController.swift in Sources */,
+				CEA94A1A1B8C433A00209F92 /* UserTypePicker.swift in Sources */,
+				CEA94A131B8B712100209F92 /* NextButton.swift in Sources */,
+				CE93E6EA1B9622EB00D9C907 /* CustomRenderDelegate.swift in Sources */,
+				CEC138431B958136000B0C7A /* TaskTableViewCell.swift in Sources */,
+				CEC138411B954BCB000B0C7A /* TaskCollectionViewCell.swift in Sources */,
+				CEC1383D1B94D3CC000B0C7A /* TasksViewController.swift in Sources */,
+				CEA94A0A1B8B25D700209F92 /* FirstStepViewController.swift in Sources */,
+				CEA94A201B8C821800209F92 /* DataStore.swift in Sources */,
+				CE6748271B8F0E84003EBABF /* DataContext.swift in Sources */,
+				CE6748351B8F6306003EBABF /* Task.swift in Sources */,
+				CE6748371B8F6306003EBABF /* User.swift in Sources */,
+				CE6747D71B8D809D003EBABF /* AvatarCollectionViewController.swift in Sources */,
+				CEC1383B1B94D2EE000B0C7A /* AddCollectionViewCell.swift in Sources */,
+				CE6747D51B8D6B84003EBABF /* PersonCollectionViewCell.swift in Sources */,
+				CEA94A101B8B260A00209F92 /* ThirdStepViewController.swift in Sources */,
+				CE6748291B8F1308003EBABF /* DateHelper.swift in Sources */,
+				CEA94A0C1B8B25E200209F92 /* SecondStepViewController.swift in Sources */,
+				CEC1383F1B94DAE5000B0C7A /* DeleteCollectionViewCell.swift in Sources */,
+				CE93E6EC1B96E45400D9C907 /* ScalarExtensions.swift in Sources */,
+				CE6747D21B8CCB57003EBABF /* Constants.swift in Sources */,
+				CE6747CF1B8CCAE6003EBABF /* RoundedTextField.swift in Sources */,
+				CE9F455C1B94991200D4ECD0 /* OrientationExtension.swift in Sources */,
+				CEA94A181B8C42FD00209F92 /* PersonButton.swift in Sources */,
+				CEA94A071B8AC95400209F92 /* CreatePersonViewController.swift in Sources */,
 				CED29D4D1B85002D00537C77 /* AppDelegate.swift in Sources */,
+				CE67483F1B91E022003EBABF /* UserTask.swift in Sources */,
+				CE6747D91B8D80CD003EBABF /* AvatarCollectionViewCell.swift in Sources */,
+				CE67483D1B91E00B003EBABF /* Purchase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,21 +609,28 @@
 		};
 		CED29D6B1B85002D00537C77 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB9998A2E9113B298C91F85D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = KidsApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KidsApp/KidsApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		CED29D6C1B85002D00537C77 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C69850790D581D2FCD56DD5 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = KidsApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KidsApp/KidsApp-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -419,6 +687,7 @@
 				CED29D6C1B85002D00537C77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CED29D6D1B85002D00537C77 /* Build configuration list for PBXNativeTarget "KidsAppTests" */ = {
 			isa = XCConfigurationList;
@@ -427,8 +696,22 @@
 				CED29D6F1B85002D00537C77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CE6747E41B8EF0F9003EBABF /* KidsApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CE6747E51B8EF0F9003EBABF /* KidsApp.xcdatamodel */,
+			);
+			currentVersion = CE6747E51B8EF0F9003EBABF /* KidsApp.xcdatamodel */;
+			path = KidsApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CED29D3F1B85002D00537C77 /* Project object */;
 }

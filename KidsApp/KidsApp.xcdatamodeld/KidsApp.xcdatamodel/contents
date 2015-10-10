@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Purchase" representedClassName="PRODUCT_MODULE_NAME.Purchase" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="user" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="purchase" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Task" representedClassName="KidsApp.Task" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="userTask" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UserTask" inverseName="task" inverseEntity="UserTask" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="KidsApp.User" syncable="YES">
+        <attribute name="age" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="current" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="points" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="purchase" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Purchase" inverseName="user" inverseEntity="Purchase" syncable="YES"/>
+        <relationship name="userTask" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UserTask" inverseName="user" inverseEntity="UserTask" syncable="YES"/>
+    </entity>
+    <entity name="UserTask" representedClassName="KidsApp.UserTask" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="succesed" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="userTask" inverseEntity="Task" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userTask" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Purchase" positionX="-18" positionY="117" width="128" height="105"/>
+        <element name="Task" positionX="-45" positionY="0" width="128" height="90"/>
+        <element name="User" positionX="214" positionY="177" width="128" height="180"/>
+        <element name="UserTask" positionX="250" positionY="-27" width="128" height="120"/>
+    </elements>
+</model>

@@ -1,0 +1,19 @@
+PODS:
+  - AlecrimCoreData (3.3.1)
+  - BetweenKit (2.0.1)
+  - SESlideTableViewCell (0.2.3)
+  - youtube-ios-player-helper (0.1.4)
+
+DEPENDENCIES:
+  - AlecrimCoreData
+  - BetweenKit
+  - SESlideTableViewCell
+  - youtube-ios-player-helper (~> 0.1.4)
+
+SPEC CHECKSUMS:
+  AlecrimCoreData: ea5fc35ded2c5a796615f4e591be438c38170bb5
+  BetweenKit: 89edc0c6dd96eb33ea02c097bb99a9b1c14880f0
+  SESlideTableViewCell: 1eadfe4e9d4d72659f681a0d167a82133880d291
+  youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
+
+COCOAPODS: 0.38.2

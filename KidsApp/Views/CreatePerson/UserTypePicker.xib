@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserTypePicker" customModule="KidsApp" customModuleProvider="target">
+            <connections>
+                <outlet property="firstButton" destination="dmT-8X-kyY" id="R1B-dS-yfY"/>
+                <outlet property="secondButton" destination="KAb-dK-yoi" id="wkn-qY-R5x"/>
+                <outlet property="thirdButton" destination="oZN-bB-cla" id="2jd-Xl-0W3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="-1" y="0.0" width="596" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KAb-dK-yoi" userLabel="second" customClass="PersonButton" customModule="KidsApp" customModuleProvider="target">
+                    <rect key="frame" x="223" y="0.0" width="150" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="MkP-C9-K58"/>
+                        <constraint firstAttribute="width" constant="150" id="XZe-NK-aXu"/>
+                    </constraints>
+                    <inset key="titleEdgeInsets" minX="-280" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="50"/>
+                    <state key="normal" image="icon">
+                        <attributedString key="attributedTitle">
+                            <fragment content="ПОЛЕЗНЫЕ ДЕНЕЧКИ">
+                                <attributes>
+                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <font key="NSFont" size="19" name="HelveticaNeue-MediumItalic"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                    </state>
+                    <state key="highlighted" image="icon"/>
+                    <connections>
+                        <action selector="chooseSecondType:" destination="-1" eventType="touchUpInside" id="TIN-bs-UWv"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="dmT-8X-kyY" userLabel="first" customClass="PersonButton" customModule="KidsApp" customModuleProvider="target">
+                    <rect key="frame" x="33" y="0.0" width="150" height="200"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-MediumItalic" family="Helvetica Neue" pointSize="19"/>
+                    <inset key="titleEdgeInsets" minX="-280" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="50"/>
+                    <state key="normal" title="ВОСПИТАНИЕ РЕБЕНКА" image="icon">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected">
+                        <color key="titleColor" red="0.85098039219999999" green="0.39607843139999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="highlighted" image="icon"/>
+                    <connections>
+                        <action selector="chooseFirstType:" destination="-1" eventType="touchUpInside" id="pd6-cr-lTA"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oZN-bB-cla" userLabel="third" customClass="PersonButton" customModule="KidsApp" customModuleProvider="target">
+                    <rect key="frame" x="413" y="0.0" width="150" height="200"/>
+                    <inset key="titleEdgeInsets" minX="-280" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="50"/>
+                    <state key="normal" image="icon">
+                        <attributedString key="attributedTitle">
+                            <fragment content="ТРЕНИРОВКИ И ДИЕТА">
+                                <attributes>
+                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <font key="NSFont" size="19" name="HelveticaNeue-MediumItalic"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                    </state>
+                    <state key="highlighted" image="icon"/>
+                    <connections>
+                        <action selector="chooseThirdType:" destination="-1" eventType="touchUpInside" id="JVB-cy-rYs"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="oZN-bB-cla" firstAttribute="height" secondItem="KAb-dK-yoi" secondAttribute="height" id="CnG-wx-mXQ"/>
+                <constraint firstItem="dmT-8X-kyY" firstAttribute="width" secondItem="KAb-dK-yoi" secondAttribute="width" id="Kw2-H0-Qgl"/>
+                <constraint firstItem="oZN-bB-cla" firstAttribute="centerY" secondItem="KAb-dK-yoi" secondAttribute="centerY" id="MMV-Qs-cpj"/>
+                <constraint firstItem="dmT-8X-kyY" firstAttribute="height" secondItem="KAb-dK-yoi" secondAttribute="height" id="YLF-c7-hwh"/>
+                <constraint firstItem="KAb-dK-yoi" firstAttribute="centerY" secondItem="dmT-8X-kyY" secondAttribute="centerY" id="cX5-kl-ym2"/>
+                <constraint firstItem="dmT-8X-kyY" firstAttribute="trailing" secondItem="KAb-dK-yoi" secondAttribute="leading" constant="-40" id="fBT-mD-SxG"/>
+                <constraint firstItem="KAb-dK-yoi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jQA-Mc-Frp"/>
+                <constraint firstItem="oZN-bB-cla" firstAttribute="leading" secondItem="KAb-dK-yoi" secondAttribute="trailing" constant="40" id="uJn-v1-GDA"/>
+                <constraint firstItem="KAb-dK-yoi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="wkF-21-0nS"/>
+                <constraint firstItem="oZN-bB-cla" firstAttribute="width" secondItem="KAb-dK-yoi" secondAttribute="width" id="x8p-v8-xIu"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="309" y="132"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon" width="282" height="268"/>
+    </resources>
+</document>
