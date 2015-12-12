@@ -38,8 +38,11 @@ class DataStore {
 //deleteAllUserTasks()
   }
   
-  
-  // MARK: - Users Method
+}
+
+// MARK: - Users Method
+extension DataStore {
+
   
   func createUser(type: PersonType) {
     newUser = dataContext.users.createEntity()
@@ -61,7 +64,7 @@ class DataStore {
       fetchUsers()
       return true
     } else {
-      println("Save data error!!!")
+      print("Save data error!!!")
       return false
     }
   }
@@ -74,7 +77,11 @@ class DataStore {
     currentUser = dataContext.users.filter{ $0.current == true }.first()
   }
   
-  // MARK: -  Task Method
+}
+
+// MARK: -  Task Method
+extension DataStore {
+
   
   func addNewTask(name: String){
     let task = dataContext.tasks.createEntity()
@@ -130,7 +137,7 @@ class DataStore {
     //    let tasks2 = getUserTasks(NSDate().dateByAddingDays(1))
     //    let tasks3 = getUserTasks(NSDate().dateByAddingDays(2))
     
-    println()
+    print("")
   }
   
   func createTestData() {
@@ -158,7 +165,7 @@ class DataStore {
   
   func fetchUserTasks(date: NSDate) -> [UserTask]{
     var array = dataContext.userTasks.filter{ $0.user == self.currentUser }.toArray() as [UserTask]
-    array = array.filter({$0.date.isEqualToDateIgnoringTime(date)}).sorted({$0.index < $1.index})
+    array = array.filter({$0.date.isEqualToDateIgnoringTime(date)}).sort({$0.index < $1.index})
     return array
   }
   

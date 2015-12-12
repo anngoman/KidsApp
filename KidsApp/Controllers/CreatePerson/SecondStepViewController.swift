@@ -30,7 +30,7 @@ class SecondStepViewController: ResponsiveTextFieldViewController {
         if let user = DataStore.sharedDataStore.newUser {
           user.firstName = firstNameTextField.text
           user.lastName = secondNameTextField.text
-          if let age = ageTextField.text.toInt() {
+          if let age = Int(ageTextField.text) {
             user.age = age
           }
         }

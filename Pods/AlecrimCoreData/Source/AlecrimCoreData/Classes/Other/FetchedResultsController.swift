@@ -32,7 +32,16 @@ public final class FetchedResultsController<T: NSManagedObject> {
         frc.delegate = self.underlyingFecthedResultsControllerDelegate
         
         var error: NSError? = nil
-        let success = frc.performFetch(&error)
+        let success: Bool
+        do {
+            try frc.performFetch()
+            success = true
+        } catch var error1 as NSError {
+            error = error1
+            success = false
+        } catch {
+            fatalError()
+        }
         
         self.hasUnderlyingFetchedResultsController = true
         
@@ -145,12 +154,12 @@ extension FetchedResultsController {
         return self.underlyingFetchedResultsController.fetchRequest
     }
     
-    public func performFetch(error: NSErrorPointer) -> Bool {
+    public func performFetch() throws {
         if let cacheName = self.underlyingFetchedResultsController.cacheName {
             FetchedResultsController.deleteCacheWithName(cacheName)
         }
         
-        return self.underlyingFetchedResultsController.performFetch(error)
+        try self.underlyingFetchedResultsController.performFetch()
     }
     
     public func refresh() -> (success: Bool, error: NSError?) {
@@ -161,7 +170,14 @@ extension FetchedResultsController {
         }
         
         var error: NSError? = nil
-        let success = self.performFetch(&error)
+        let success: Bool
+        do {
+            try self.performFetch()
+            success = true
+        } catch let error1 as NSError {
+            error = error1
+            success = false
+        }
 
         for closure in self.didChangeContentClosures {
             closure()
@@ -313,7 +329,7 @@ extension FetchedResultsController {
 extension FetchedResultsController {
     
     public var sectionIndexTitles: [String] {
-        return self.underlyingFetchedResultsController.sectionIndexTitles as! [String]
+        return self.underlyingFetchedResultsController.sectionIndexTitles 
     }
     
     public func sectionIndexTitleForSectionName(sectionName: String) -> String? {
@@ -334,26 +350,26 @@ private class FecthedResultsControllerDelegate: NSObject, NSFetchedResultsContro
         super.init()
     }
     
-    @objc func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    @objc func controller(controller: NSFetchedResultsController, didChangeObject anObject: NSManagedObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
             for closure in self.fetchedResultsController.didInsertEntityClosures {
-                closure(anObject as! NSManagedObject, newIndexPath!)
+                closure(anObject , newIndexPath!)
             }
             
         case .Delete:
             for closure in self.fetchedResultsController.didDeleteEntityClosures {
-                closure(anObject as! NSManagedObject, indexPath!)
+                closure(anObject , indexPath!)
             }
             
         case .Update:
             for closure in self.fetchedResultsController.didUpdateEntityClosures {
-                closure(anObject as! NSManagedObject, indexPath!)
+                closure(anObject , indexPath!)
             }
             
         case .Move:
             for closure in self.fetchedResultsController.didMoveEntityClosures {
-                closure(anObject as! NSManagedObject, indexPath!, newIndexPath!)
+                closure(anObject , indexPath!, newIndexPath!)
             }
             
         default:
@@ -395,8 +411,8 @@ private class FecthedResultsControllerDelegate: NSObject, NSFetchedResultsContro
         }
     }
     
-    @objc func controller(controller: NSFetchedResultsController, sectionIndexTitleForSectionName sectionName: String?) -> String? {
-        return self.fetchedResultsController.sectionIndexTitleClosure?(sectionName!)
+    @objc func controller(controller: NSFetchedResultsController, sectionIndexTitleForSectionName sectionName: String) -> String? {
+        return self.fetchedResultsController.sectionIndexTitleClosure?(sectionName)
     }
 
 }
@@ -408,9 +424,9 @@ private class FecthedResultsControllerDelegate: NSObject, NSFetchedResultsContro
 extension FetchedResultsController {
     
     public func bindToTableView(tableView: UITableView, rowAnimation: UITableViewRowAnimation = .Fade, reloadRowAtIndexPath reloadRowAtIndexPathClosure: (NSIndexPath -> Void)? = nil) -> Self {
-        var insertedSectionIndexes = NSMutableIndexSet()
-        var deletedSectionIndexes = NSMutableIndexSet()
-        var updatedSectionIndexes = NSMutableIndexSet()
+        let insertedSectionIndexes = NSMutableIndexSet()
+        let deletedSectionIndexes = NSMutableIndexSet()
+        let updatedSectionIndexes = NSMutableIndexSet()
         
         var insertedItemIndexPaths = [NSIndexPath]()
         var deletedItemIndexPaths = [NSIndexPath]()
@@ -469,7 +485,7 @@ extension FetchedResultsController {
             }
             .didUpdateEntity { entity, indexPath in
                 if !reloadData {
-                    if !deletedSectionIndexes.containsIndex(indexPath.section) && find(deletedItemIndexPaths, indexPath) == nil && find(updatedItemIndexPaths, indexPath) == nil {
+                    if !deletedSectionIndexes.containsIndex(indexPath.section) && deletedItemIndexPaths.indexOf(indexPath) == nil && updatedItemIndexPaths.indexOf(indexPath) == nil {
                         updatedItemIndexPaths.append(indexPath)
                     }
                 }
@@ -539,9 +555,9 @@ extension FetchedResultsController {
     }
 
     public func bindToCollectionView(collectionView: UICollectionView, reloadItemAtIndexPath reloadItemAtIndexPathClosure: (NSIndexPath -> Void)? = nil) -> Self {
-        var insertedSectionIndexes = NSMutableIndexSet()
-        var deletedSectionIndexes = NSMutableIndexSet()
-        var updatedSectionIndexes = NSMutableIndexSet()
+        let insertedSectionIndexes = NSMutableIndexSet()
+        let deletedSectionIndexes = NSMutableIndexSet()
+        let updatedSectionIndexes = NSMutableIndexSet()
         
         var insertedItemIndexPaths = [NSIndexPath]()
         var deletedItemIndexPaths = [NSIndexPath]()
@@ -600,7 +616,7 @@ extension FetchedResultsController {
             }
             .didUpdateEntity { entity, indexPath in
                 if !reloadData {
-                    if !deletedSectionIndexes.containsIndex(indexPath.section) && find(deletedItemIndexPaths, indexPath) == nil && find(updatedItemIndexPaths, indexPath) == nil {
+                    if !deletedSectionIndexes.containsIndex(indexPath.section) && deletedItemIndexPaths.indexOf(indexPath) == nil && updatedItemIndexPaths.indexOf(indexPath) == nil {
                         updatedItemIndexPaths.append(indexPath)
                     }
                 }

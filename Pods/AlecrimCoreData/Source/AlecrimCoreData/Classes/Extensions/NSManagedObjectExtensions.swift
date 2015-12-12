@@ -23,7 +23,14 @@ extension NSManagedObject {
         if self.objectID.temporaryID {
             if let moc = self.managedObjectContext {
                 var error: NSError? = nil
-                let success = moc.obtainPermanentIDsForObjects([self as NSManagedObject], error: &error)
+                let success: Bool
+                do {
+                    try moc.obtainPermanentIDsForObjects([self as NSManagedObject])
+                    success = true
+                } catch let error1 as NSError {
+                    error = error1
+                    success = false
+                }
                 if !success {
                     alecrimCoreDataHandleError(error)
                     return nil
@@ -35,7 +42,13 @@ extension NSManagedObject {
         }
         
         var error: NSError? = nil
-        let objectInContext = otherManagedObjectContext.existingObjectWithID(self.objectID, error: &error)
+        let objectInContext: NSManagedObject?
+        do {
+            objectInContext = try otherManagedObjectContext.existingObjectWithID(self.objectID)
+        } catch let error1 as NSError {
+            error = error1
+            objectInContext = nil
+        }
         
         if error != nil {
             alecrimCoreDataHandleError(error)

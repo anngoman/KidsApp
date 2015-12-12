@@ -17,7 +17,7 @@ public enum StoreType {
 public struct ContextOptions {
     
     // older versions compatibility (will be removed in 4.0)
-    public static var stringComparisonPredicateOptions = (NSComparisonPredicateOptions.CaseInsensitivePredicateOption | NSComparisonPredicateOptions.DiacriticInsensitivePredicateOption)
+    public static var stringComparisonPredicateOptions: NSComparisonPredicateOptions = ([NSComparisonPredicateOptions.CaseInsensitivePredicateOption, NSComparisonPredicateOptions.DiacriticInsensitivePredicateOption])
     public static var fetchBatchSize = 20
     
     // MARK: -
@@ -70,12 +70,12 @@ public struct ContextOptions {
     
     /// Initializes ContextOptions with properties filled for use by main app and its extensions.
     ///
-    /// :param: managedObjectModelBundle   The managed object model bundle. You can use `NSBundle(forClass: MyModule.MyDataContext.self)`, for example.
-    /// :param: managedObjectModelName     The managed object model name without the extension. Example: `"MyGreatApp"`.
-    /// :param: bundleIdentifier           The bundle identifier for use when creating the directory for the persisent store. Example: `"com.mycompany.MyGreatApp"`.
-    /// :param: applicationGroupIdentifier The application group identifier (see Xcode target settings). Example: `"group.com.mycompany.MyGreatApp"` for iOS or `"12ABCD3EF4.com.mycompany.MyGreatApp"` for OS X where `12ABCD3EF4` is your team identifier.
+    /// - parameter managedObjectModelBundle:   The managed object model bundle. You can use `NSBundle(forClass: MyModule.MyDataContext.self)`, for example.
+    /// - parameter managedObjectModelName:     The managed object model name without the extension. Example: `"MyGreatApp"`.
+    /// - parameter bundleIdentifier:           The bundle identifier for use when creating the directory for the persisent store. Example: `"com.mycompany.MyGreatApp"`.
+    /// - parameter applicationGroupIdentifier: The application group identifier (see Xcode target settings). Example: `"group.com.mycompany.MyGreatApp"` for iOS or `"12ABCD3EF4.com.mycompany.MyGreatApp"` for OS X where `12ABCD3EF4` is your team identifier.
     ///
-    /// :returns: An initialized ContextOptions with properties filled for use by main app and its extensions.
+    /// - returns: An initialized ContextOptions with properties filled for use by main app and its extensions.
     public init(managedObjectModelBundle: NSBundle, managedObjectModelName: String, bundleIdentifier: String, applicationGroupIdentifier: String) {
         self.managedObjectModelURL = managedObjectModelBundle.managedObjectModelURLForManagedObjectModelName(managedObjectModelName)
         self.persistentStoreURL = managedObjectModelBundle.persistentStoreURLForManagedObjectModelName(managedObjectModelName, bundleIdentifier: bundleIdentifier, applicationGroupIdentifier: applicationGroupIdentifier)
@@ -142,7 +142,7 @@ extension NSBundle {
             let url = applicationSupportURL
                 .URLByAppendingPathComponent(bundleIdentifier, isDirectory: true)
                 .URLByAppendingPathComponent("CoreData", isDirectory: true)
-                .URLByAppendingPathComponent(managedObjectModelName.stringByAppendingPathExtension("sqlite")!, isDirectory: false)
+                .URLByAppendingPathComponent((managedObjectModelName as NSString).stringByAppendingPathExtension("sqlite")!, isDirectory: false)
             
             return url
         }
@@ -157,7 +157,7 @@ extension NSBundle {
                 .URLByAppendingPathComponent("Application Support", isDirectory: true)
                 .URLByAppendingPathComponent(bundleIdentifier, isDirectory: true)
                 .URLByAppendingPathComponent("CoreData", isDirectory: true)
-                .URLByAppendingPathComponent(managedObjectModelName.stringByAppendingPathExtension("sqlite")!, isDirectory: false)
+                .URLByAppendingPathComponent((managedObjectModelName as NSString).stringByAppendingPathExtension("sqlite")!, isDirectory: false)
             
             return url
         }

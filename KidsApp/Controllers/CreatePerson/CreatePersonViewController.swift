@@ -20,7 +20,7 @@ class CreatePersonViewController: UIViewController {
   
   @IBOutlet weak var containerView: UIView!
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   

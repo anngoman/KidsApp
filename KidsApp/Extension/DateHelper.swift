@@ -28,9 +28,9 @@ public extension NSDate {
   private class func yearInSeconds() -> Double { return 31556926 }
   
   // MARK: Components
-  private class func componentFlags() -> NSCalendarUnit { return NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitWeekOfYear | NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitMinute | NSCalendarUnit.CalendarUnitSecond  | NSCalendarUnit.CalendarUnitWeekday | NSCalendarUnit.CalendarUnitWeekdayOrdinal | NSCalendarUnit.CalendarUnitWeekOfYear }
+  private class func componentFlags() -> NSCalendarUnit { return NSCalendarUnit.Year.union(NSCalendarUnit.Month).union(NSCalendarUnit.Day).union(NSCalendarUnit.WeekOfYear).union(NSCalendarUnit.Hour).union(NSCalendarUnit.Minute).union(NSCalendarUnit.Second).union(NSCalendarUnit.Weekday).union(NSCalendarUnit.WeekdayOrdinal).union(NSCalendarUnit.WeekOfYear) }
   
-  private class func components(#fromDate: NSDate) -> NSDateComponents! {
+  private class func components(fromDate fromDate: NSDate) -> NSDateComponents! {
     return NSCalendar.currentCalendar().components(NSDate.componentFlags(), fromDate: fromDate)
   }
   
@@ -43,9 +43,9 @@ public extension NSDate {
   /**
   Returns a new NSDate object based on a date string and a specified format.
   
-  :param: fromString :String Date string i.e. "16 July 1972 6:12:00".
-  :param: format :DateFormat Format of date. Can be .ISO8601("1972-07-16T08:15:30-05:00"), DotNet("/Date(1268123281843)/"), RSS("Fri, 09 Sep 2011 15:26:08 +0200"), AltRSS("09 Sep 2011 15:26:08 +0200") or Custom("16 July 1972 6:12:00").
-  :returns: NSDate
+  - parameter fromString: :String Date string i.e. "16 July 1972 6:12:00".
+  - parameter format: :DateFormat Format of date. Can be .ISO8601("1972-07-16T08:15:30-05:00"), DotNet("/Date(1268123281843)/"), RSS("Fri, 09 Sep 2011 15:26:08 +0200"), AltRSS("09 Sep 2011 15:26:08 +0200") or Custom("16 July 1972 6:12:00").
+  - returns: NSDate
   */
   convenience init(fromString string: String, format:DateFormat)
   {
@@ -75,7 +75,7 @@ public extension NSDate {
       } else if string.hasSuffix("Z") {
         s = s.substringToIndex(s.length-1) + "GMT"
       }
-      var formatter = NSDate.formatter(format: ISO8601Format)
+      var formatter = NSDate.formatter(ISO8601Format)
       if let date = formatter.dateFromString(string as String) {
         self.init(timeInterval:0, sinceDate:date)
       } else {
@@ -88,7 +88,7 @@ public extension NSDate {
       if string.hasSuffix("Z") {
         s = s.substringToIndex(s.length-1) + "GMT"
       }
-      var formatter = NSDate.formatter(format: RSSFormat)
+      var formatter = NSDate.formatter(RSSFormat)
       if let date = formatter.dateFromString(string as String) {
         self.init(timeInterval:0, sinceDate:date)
       } else {
@@ -101,7 +101,7 @@ public extension NSDate {
       if string.hasSuffix("Z") {
         s = s.substringToIndex(s.length-1) + "GMT"
       }
-      var formatter = NSDate.formatter(format: AltRSSFormat)
+      var formatter = NSDate.formatter(AltRSSFormat)
       if let date = formatter.dateFromString(string as String) {
         self.init(timeInterval:0, sinceDate:date)
       } else {
@@ -110,7 +110,7 @@ public extension NSDate {
       
     case .Custom(let dateFormat):
       
-      var formatter = NSDate.formatter(format: dateFormat)
+      var formatter = NSDate.formatter(dateFormat)
       if let date = formatter.dateFromString(string as String) {
         self.init(timeInterval:0, sinceDate:date)
       } else {
@@ -126,8 +126,8 @@ public extension NSDate {
   /**
   Compares dates without while ignoring time.
   
-  :param: date :NSDate Date to compare.
-  :returns: :Bool Returns true if dates are equal.
+  - parameter date: :NSDate Date to compare.
+  - returns: :Bool Returns true if dates are equal.
   */
 
   
@@ -141,7 +141,7 @@ public extension NSDate {
   /**
   Checks if date is today.
   
-  :returns: :Bool Returns true if date is today.
+  - returns: :Bool Returns true if date is today.
   */
   func isToday() -> Bool
   {
@@ -151,7 +151,7 @@ public extension NSDate {
   /**
   Checks if date is tomorrow.
   
-  :returns: :Bool Returns true if date is tomorrow.
+  - returns: :Bool Returns true if date is tomorrow.
   */
   func isTomorrow() -> Bool
   {
@@ -161,7 +161,7 @@ public extension NSDate {
   /**
   Checks if date is yesterday.
   
-  :returns: :Bool Returns true if date is yesterday.
+  - returns: :Bool Returns true if date is yesterday.
   */
   func isYesterday() -> Bool
   {
@@ -171,8 +171,8 @@ public extension NSDate {
   /**
   Compares dates to see if they are in the same week.
   
-  :param: date :NSDate Date to compare.
-  :returns: :Bool Returns true if date is tomorrow.
+  - parameter date: :NSDate Date to compare.
+  - returns: :Bool Returns true if date is tomorrow.
   */
   func isSameWeekAsDate(date: NSDate) -> Bool
   {
@@ -189,7 +189,7 @@ public extension NSDate {
   /**
   Checks if date is this week.
   
-  :returns: :Bool Returns true if date is this week.
+  - returns: :Bool Returns true if date is this week.
   */
   func isThisWeek() -> Bool
   {
@@ -199,7 +199,7 @@ public extension NSDate {
   /**
   Checks if date is next week.
   
-  :returns: :Bool Returns true if date is next week.
+  - returns: :Bool Returns true if date is next week.
   */
   func isNextWeek() -> Bool
   {
@@ -211,7 +211,7 @@ public extension NSDate {
   /**
   Checks if date is last week.
   
-  :returns: :Bool Returns true if date is last week.
+  - returns: :Bool Returns true if date is last week.
   */
   func isLastWeek() -> Bool
   {
@@ -223,8 +223,8 @@ public extension NSDate {
   /**
   Compares dates to see if they are in the same year.
   
-  :param: date :NSDate Date to compare.
-  :returns: :Bool Returns true if date is this week.
+  - parameter date: :NSDate Date to compare.
+  - returns: :Bool Returns true if date is this week.
   */
   func isSameYearAsDate(date: NSDate) -> Bool
   {
@@ -236,7 +236,7 @@ public extension NSDate {
   /**
   Checks if date is this year.
   
-  :returns: :Bool Returns true if date is this year.
+  - returns: :Bool Returns true if date is this year.
   */
   func isThisYear() -> Bool
   {
@@ -246,7 +246,7 @@ public extension NSDate {
   /**
   Checks if date is next year.
   
-  :returns: :Bool Returns true if date is next year.
+  - returns: :Bool Returns true if date is next year.
   */
   func isNextYear() -> Bool
   {
@@ -258,7 +258,7 @@ public extension NSDate {
   /**
   Checks if date is last year.
   
-  :returns: :Bool Returns true if date is last year.
+  - returns: :Bool Returns true if date is last year.
   */
   func isLastYear() -> Bool
   {
@@ -270,8 +270,8 @@ public extension NSDate {
   /**
   Compares dates to see if it's an earlier date.
   
-  :param: date :NSDate Date to compare.
-  :returns: :Bool Returns true if date is earlier.
+  - parameter date: :NSDate Date to compare.
+  - returns: :Bool Returns true if date is earlier.
   */
   func isEarlierThanDate(date: NSDate) -> Bool
   {
@@ -281,8 +281,8 @@ public extension NSDate {
   /**
   Compares dates to see if it's a later date.
   
-  :param: date :NSDate Date to compare.
-  :returns: :Bool Returns true if date is later.
+  - parameter date: :NSDate Date to compare.
+  - returns: :Bool Returns true if date is later.
   */
   func isLaterThanDate(date: NSDate) -> Bool
   {
@@ -295,89 +295,89 @@ public extension NSDate {
   /**
   Returns a new NSDate object by a adding days.
   
-  :param: days :Int Days to add.
-  :returns: NSDate
+  - parameter days: :Int Days to add.
+  - returns: NSDate
   */
   func dateByAddingDays(days: Int) -> NSDate
   {
     let dateComp = NSDateComponents()
     dateComp.day = days
-    return NSCalendar.currentCalendar().dateByAddingComponents(dateComp, toDate: self, options: NSCalendarOptions(0))!
+    return NSCalendar.currentCalendar().dateByAddingComponents(dateComp, toDate: self, options: NSCalendarOptions(rawValue: 0))!
   }
   
   /**
   Returns a new NSDate object by a substracting days.
   
-  :param: days :Int Days to substract.
-  :returns: NSDate
+  - parameter days: :Int Days to substract.
+  - returns: NSDate
   */
   func dateBySubtractingDays(days: Int) -> NSDate
   {
     let dateComp = NSDateComponents()
     dateComp.day = (days * -1)
-    return NSCalendar.currentCalendar().dateByAddingComponents(dateComp, toDate: self, options: NSCalendarOptions(0))!
+    return NSCalendar.currentCalendar().dateByAddingComponents(dateComp, toDate: self, options: NSCalendarOptions(rawValue: 0))!
   }
   
   /**
   Returns a new NSDate object by a adding hours.
   
-  :param: days :Int Hours to add.
-  :returns: NSDate
+  - parameter days: :Int Hours to add.
+  - returns: NSDate
   */
   func dateByAddingHours(hours: Int) -> NSDate
   {
     let dateComp = NSDateComponents()
     dateComp.hour = hours
-    return NSCalendar.currentCalendar().dateByAddingComponents(dateComp, toDate: self, options: NSCalendarOptions(0))!
+    return NSCalendar.currentCalendar().dateByAddingComponents(dateComp, toDate: self, options: NSCalendarOptions(rawValue: 0))!
   }
   
   /**
   Returns a new NSDate object by a substracting hours.
   
-  :param: days :Int Hours to substract.
-  :returns: NSDate
+  - parameter days: :Int Hours to substract.
+  - returns: NSDate
   */
   func dateBySubtractingHours(hours: Int) -> NSDate
   {
     let dateComp = NSDateComponents()
     dateComp.hour = (hours * -1)
-    return NSCalendar.currentCalendar().dateByAddingComponents(dateComp, toDate: self, options: NSCalendarOptions(0))!
+    return NSCalendar.currentCalendar().dateByAddingComponents(dateComp, toDate: self, options: NSCalendarOptions(rawValue: 0))!
   }
   
   /**
   Returns a new NSDate object by a adding minutes.
   
-  :param: days :Int Minutes to add.
-  :returns: NSDate
+  - parameter days: :Int Minutes to add.
+  - returns: NSDate
   */
   func dateByAddingMinutes(minutes: Int) -> NSDate
   {
     let dateComp = NSDateComponents()
     dateComp.minute = minutes
-    return NSCalendar.currentCalendar().dateByAddingComponents(dateComp, toDate: self, options: NSCalendarOptions(0))!
+    return NSCalendar.currentCalendar().dateByAddingComponents(dateComp, toDate: self, options: NSCalendarOptions(rawValue: 0))!
   }
   
   /**
   Returns a new NSDate object by a adding minutes.
   
-  :param: days :Int Minutes to add.
-  :returns: NSDate
+  - parameter days: :Int Minutes to add.
+  - returns: NSDate
   */
   func dateBySubtractingMinutes(minutes: Int) -> NSDate
   {
     let dateComp = NSDateComponents()
     dateComp.minute = (minutes * -1)
-    return NSCalendar.currentCalendar().dateByAddingComponents(dateComp, toDate: self, options: NSCalendarOptions(0))!
+    return NSCalendar.currentCalendar().dateByAddingComponents(dateComp, toDate: self, options: NSCalendarOptions(rawValue: 0))!
   }
   
   /**
   Returns a new NSDate object from the start of the day.
   
-  :returns: NSDate
+  - returns: NSDate
   */
   func dateAtStartOfDay() -> NSDate
   {
-    var components = self.components()
+    let components = self.components()
     components.hour = 0
     components.minute = 0
     components.second = 0
@@ -387,11 +387,11 @@ public extension NSDate {
   /**
   Returns a new NSDate object from the end of the day.
   
-  :returns: NSDate
+  - returns: NSDate
   */
   func dateAtEndOfDay() -> NSDate
   {
-    var components = self.components()
+    let components = self.components()
     components.hour = 23
     components.minute = 59
     components.second = 59
@@ -401,12 +401,12 @@ public extension NSDate {
   /**
   Returns a new NSDate object from the start of the week.
   
-  :returns: NSDate
+  - returns: NSDate
   */
   func dateAtStartOfWeek() -> NSDate
   {
-    let flags :NSCalendarUnit = NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitWeekOfYear | NSCalendarUnit.CalendarUnitWeekday
-    var components = NSCalendar.currentCalendar().components(flags, fromDate: self)
+    let flags :NSCalendarUnit = [NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.WeekOfYear, NSCalendarUnit.Weekday]
+    let components = NSCalendar.currentCalendar().components(flags, fromDate: self)
     components.weekday = NSCalendar.currentCalendar().firstWeekday
     components.hour = 0
     components.minute = 0
@@ -417,12 +417,12 @@ public extension NSDate {
   /**
   Returns a new NSDate object from the end of the week.
   
-  :returns: NSDate
+  - returns: NSDate
   */
   func dateAtEndOfWeek() -> NSDate
   {
-    let flags :NSCalendarUnit = NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitWeekOfYear | NSCalendarUnit.CalendarUnitWeekday
-    var components = NSCalendar.currentCalendar().components(flags, fromDate: self)
+    let flags :NSCalendarUnit = [NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.WeekOfYear, NSCalendarUnit.Weekday]
+    let components = NSCalendar.currentCalendar().components(flags, fromDate: self)
     components.weekday = NSCalendar.currentCalendar().firstWeekday + 7
     components.hour = 0
     components.minute = 0
@@ -434,12 +434,12 @@ public extension NSDate {
   /**
   Return a new NSDate object of the first day of the month
   
-  :returns: NSDate
+  - returns: NSDate
   */
   func dateAtTheStartOfMonth() -> NSDate
   {
     //Create the date components
-    var components = self.components()
+    let components = self.components()
     components.day = 1
     //Builds the first day of the month
     let firstDayOfMonthDate :NSDate = NSCalendar.currentCalendar().dateFromComponents(components)!
@@ -451,12 +451,12 @@ public extension NSDate {
   /**
   Return a new NSDate object of the last day of the month
   
-  :returns: NSDate
+  - returns: NSDate
   */
   func dateAtTheEndOfMonth() -> NSDate {
     
     //Create the date components
-    var components = self.components()
+    let components = self.components()
     //Set the last day of this month
     components.month += 1
     components.day = 0
@@ -474,8 +474,8 @@ public extension NSDate {
   /**
   Returns the interval in minutes after a date.
   
-  :param: date :NSDate Date to compare.
-  :returns: Int
+  - parameter date: :NSDate Date to compare.
+  - returns: Int
   */
   func minutesAfterDate(date: NSDate) -> Int
   {
@@ -486,8 +486,8 @@ public extension NSDate {
   /**
   Returns the interval in minutes before a date.
   
-  :param: date :NSDate Date to compare.
-  :returns: Int
+  - parameter date: :NSDate Date to compare.
+  - returns: Int
   */
   func minutesBeforeDate(date: NSDate) -> Int
   {
@@ -498,8 +498,8 @@ public extension NSDate {
   /**
   Returns the interval in hours after a date.
   
-  :param: date :NSDate Date to compare.
-  :returns: Int
+  - parameter date: :NSDate Date to compare.
+  - returns: Int
   */
   func hoursAfterDate(date: NSDate) -> Int
   {
@@ -510,8 +510,8 @@ public extension NSDate {
   /**
   Returns the interval in hours before a date.
   
-  :param: date :NSDate Date to compare.
-  :returns: Int
+  - parameter date: :NSDate Date to compare.
+  - returns: Int
   */
   func hoursBeforeDate(date: NSDate) -> Int
   {
@@ -522,8 +522,8 @@ public extension NSDate {
   /**
   Returns the interval in days after a date.
   
-  :param: date :NSDate Date to compare.
-  :returns: Int
+  - parameter date: :NSDate Date to compare.
+  - returns: Int
   */
   func daysAfterDate(date: NSDate) -> Int
   {
@@ -534,8 +534,8 @@ public extension NSDate {
   /**
   Returns the interval in days before a date.
   
-  :param: date :NSDate Date to compare.
-  :returns: Int
+  - parameter date: :NSDate Date to compare.
+  - returns: Int
   */
   func daysBeforeDate(date: NSDate) -> Int
   {
@@ -549,7 +549,7 @@ public extension NSDate {
   /**
   Returns the nearest hour.
   
-  :returns: Int
+  - returns: Int
   */
   func nearestHour () -> Int {
     let halfHour = NSDate.minuteInSeconds() * 30
@@ -566,67 +566,67 @@ public extension NSDate {
   /**
   Returns the year component.
   
-  :returns: Int
+  - returns: Int
   */
   func year () -> Int { return self.components().year  }
   /**
   Returns the month component.
   
-  :returns: Int
+  - returns: Int
   */
   func month () -> Int { return self.components().month }
   /**
   Returns the week of year component.
   
-  :returns: Int
+  - returns: Int
   */
   func week () -> Int { return self.components().weekOfYear }
   /**
   Returns the day component.
   
-  :returns: Int
+  - returns: Int
   */
   func day () -> Int { return self.components().day }
   /**
   Returns the hour component.
   
-  :returns: Int
+  - returns: Int
   */
   func hour () -> Int { return self.components().hour }
   /**
   Returns the minute component.
   
-  :returns: Int
+  - returns: Int
   */
   func minute () -> Int { return self.components().minute }
   /**
   Returns the seconds component.
   
-  :returns: Int
+  - returns: Int
   */
   func seconds () -> Int { return self.components().second }
   /**
   Returns the weekday component.
   
-  :returns: Int
+  - returns: Int
   */
   func weekday () -> Int { return self.components().weekday }
   /**
   Returns the nth days component. e.g. 2nd Tuesday of the month is 2.
   
-  :returns: Int
+  - returns: Int
   */
   func nthWeekday () -> Int { return self.components().weekdayOrdinal }
   /**
   Returns the days of the month.
   
-  :returns: Int
+  - returns: Int
   */
-  func monthDays () -> Int { return NSCalendar.currentCalendar().rangeOfUnit(NSCalendarUnit.CalendarUnitDay, inUnit: NSCalendarUnit.CalendarUnitMonth, forDate: self).length }
+  func monthDays () -> Int { return NSCalendar.currentCalendar().rangeOfUnit(NSCalendarUnit.Day, inUnit: NSCalendarUnit.Month, forDate: self).length }
   /**
   Returns the first day of the week.
   
-  :returns: Int
+  - returns: Int
   */
   func firstDayOfWeek () -> Int {
     let distanceToStartOfWeek = NSDate.dayInSeconds() * Double(self.components().weekday - 1)
@@ -637,7 +637,7 @@ public extension NSDate {
   /**
   Returns the last day of the week.
   
-  :returns: Int
+  - returns: Int
   */
   func lastDayOfWeek () -> Int {
     let distanceToStartOfWeek = NSDate.dayInSeconds() * Double(self.components().weekday - 1)
@@ -649,7 +649,7 @@ public extension NSDate {
   /**
   Checks to see if the date is a weekdday.
   
-  :returns: :Bool Returns true if weekday.
+  - returns: :Bool Returns true if weekday.
   */
   func isWeekday() -> Bool {
     return !self.isWeekend()
@@ -657,10 +657,10 @@ public extension NSDate {
   /**
   Checks to see if the date is a weekdend.
   
-  :returns: :Bool Returns true if weekend.
+  - returns: :Bool Returns true if weekend.
   */
   func isWeekend() -> Bool {
-    let range = NSCalendar.currentCalendar().maximumRangeOfUnit(NSCalendarUnit.CalendarUnitWeekday)
+    let range = NSCalendar.currentCalendar().maximumRangeOfUnit(NSCalendarUnit.Weekday)
     return (self.weekday() == range.location || self.weekday() == range.length)
   }
   
@@ -670,7 +670,7 @@ public extension NSDate {
   /**
   Returns a new String object using .ShortStyle date style and .ShortStyle time style.
   
-  :returns: :String
+  - returns: :String
   */
   func toString() -> String {
     return self.toString(dateStyle: .ShortStyle, timeStyle: .ShortStyle, doesRelativeDateFormatting: false)
@@ -679,10 +679,10 @@ public extension NSDate {
   /**
   Returns a new String object based on a specified date format.
   
-  :param: format :DateFormat Format of date. Can be .ISO8601("1972-07-16T08:15:30-05:00"), DotNet("/Date(1268123281843)/"), RSS("Fri, 09 Sep 2011 15:26:08 +0200"), AltRSS("09 Sep 2011 15:26:08 +0200") or Custom("16 July 1972 6:12:00").
-  :returns: String
+  - parameter format: :DateFormat Format of date. Can be .ISO8601("1972-07-16T08:15:30-05:00"), DotNet("/Date(1268123281843)/"), RSS("Fri, 09 Sep 2011 15:26:08 +0200"), AltRSS("09 Sep 2011 15:26:08 +0200") or Custom("16 July 1972 6:12:00").
+  - returns: String
   */
-  func toString(#format: DateFormat) -> String
+  func toString(format format: DateFormat) -> String
   {
     var dateFormat: String
     switch format {
@@ -699,28 +699,28 @@ public extension NSDate {
     case .Custom(let string):
       dateFormat = string
     }
-    var formatter = NSDate.formatter(format: dateFormat)
+    var formatter = NSDate.formatter(dateFormat)
     return formatter.stringFromDate(self)
   }
   
   /**
   Returns a new String object based on a date style, time style and optional relative flag.
   
-  :param: dateStyle :NSDateFormatterStyle
-  :param: timeStyle :NSDateFormatterStyle
-  :param: doesRelativeDateFormatting :Bool
-  :returns: String
+  - parameter dateStyle: :NSDateFormatterStyle
+  - parameter timeStyle: :NSDateFormatterStyle
+  - parameter doesRelativeDateFormatting: :Bool
+  - returns: String
   */
-  func toString(#dateStyle: NSDateFormatterStyle, timeStyle: NSDateFormatterStyle, doesRelativeDateFormatting: Bool = false) -> String
+  func toString(dateStyle dateStyle: NSDateFormatterStyle, timeStyle: NSDateFormatterStyle, doesRelativeDateFormatting: Bool = false) -> String
   {
-    var formatter = NSDate.formatter(dateStyle: dateStyle, timeStyle: timeStyle, doesRelativeDateFormatting: doesRelativeDateFormatting)
+    let formatter = NSDate.formatter(dateStyle: dateStyle, timeStyle: timeStyle, doesRelativeDateFormatting: doesRelativeDateFormatting)
     return formatter.stringFromDate(self)
   }
   
   /**
   Returns a new String object based on a relative time language. i.e. just now, 1 minute ago etc..
   
-  :returns: String
+  - returns: String
   */
   func relativeTimeToString() -> String
   {
@@ -772,61 +772,61 @@ public extension NSDate {
   /**
   Returns the weekday as a new String object.
   
-  :returns: String
+  - returns: String
   */
   func weekdayToString() -> String {
-    var formatter = NSDate.formatter()
-    return formatter.weekdaySymbols[self.weekday()-1] as! String
+    let formatter = NSDate.formatter()
+    return formatter.weekdaySymbols[self.weekday()-1] 
   }
   
   /**
   Returns the short weekday as a new String object.
   
-  :returns: String
+  - returns: String
   */
   func shortWeekdayToString() -> String {
-    var formatter = NSDate.formatter()
-    return formatter.shortWeekdaySymbols[self.weekday()-1] as! String
+    let formatter = NSDate.formatter()
+    return formatter.shortWeekdaySymbols[self.weekday()-1] 
   }
   
   /**
   Returns the very short weekday as a new String object.
   
-  :returns: String
+  - returns: String
   */
   func veryShortWeekdayToString() -> String {
-    var formatter = NSDate.formatter()
-    return formatter.veryShortWeekdaySymbols[self.weekday()-1] as! String
+    let formatter = NSDate.formatter()
+    return formatter.veryShortWeekdaySymbols[self.weekday()-1] 
   }
   
   /**
   Returns the month as a new String object.
   
-  :returns: String
+  - returns: String
   */
   func monthToString() -> String {
-    var formatter = NSDate.formatter()
-    return formatter.monthSymbols[self.month()-1] as! String
+    let formatter = NSDate.formatter()
+    return formatter.monthSymbols[self.month()-1] 
   }
   
   /**
   Returns the short month as a new String object.
   
-  :returns: String
+  - returns: String
   */
   func shortMonthToString() -> String {
-    var formatter = NSDate.formatter()
-    return formatter.shortMonthSymbols[self.month()-1] as! String
+    let formatter = NSDate.formatter()
+    return formatter.shortMonthSymbols[self.month()-1] 
   }
   
   /**
   Returns the very short month as a new String object.
   
-  :returns: String
+  - returns: String
   */
   func veryShortMonthToString() -> String {
-    var formatter = NSDate.formatter()
-    return formatter.veryShortMonthSymbols[self.month()-1] as! String
+    let formatter = NSDate.formatter()
+    return formatter.veryShortMonthSymbols[self.month()-1] 
   }
   
   
@@ -835,7 +835,7 @@ public extension NSDate {
   /**
   Returns a static singleton array of NSDateFormatters so that thy are only created once.
   
-  :returns: [String: NSDateFormatter] Array of NSDateFormatters
+  - returns: [String: NSDateFormatter] Array of NSDateFormatters
   */
   private class func sharedDateFormatters() -> [String: NSDateFormatter] {
     struct Static {
@@ -851,10 +851,10 @@ public extension NSDate {
   /**
   Returns a singleton formatter based on the format, timeZone and locale. Formatters are cached in a singleton array using hashkeys generated by format, timeZone and locale.
   
-  :param: format :String
-  :param: timeZone :NSTimeZone Uses local time zone as the default
-  :param: locale :NSLocale Uses current locale as the default
-  :returns: [String: NSDateFormatter] Singleton of NSDateFormatters
+  - parameter format: :String
+  - parameter timeZone: :NSTimeZone Uses local time zone as the default
+  - parameter locale: :NSLocale Uses current locale as the default
+  - returns: [String: NSDateFormatter] Singleton of NSDateFormatters
   */
   private class func formatter(format:String = DefaultFormat, timeZone: NSTimeZone = NSTimeZone.localTimeZone(), locale: NSLocale = NSLocale.currentLocale()) -> NSDateFormatter {
     let hashKey = "\(format.hashValue)\(timeZone.hashValue)\(locale.hashValue)"
@@ -874,14 +874,14 @@ public extension NSDate {
   /**
   Returns a singleton formatter based on date style, time style and relative date. Formatters are cached in a singleton array using hashkeys generated by date style, time style, relative date, timeZone and locale.
   
-  :param: dateStyle :NSDateFormatterStyle
-  :param: timeStyle :NSDateFormatterStyle
-  :param: doesRelativeDateFormatting :Bool
-  :param: timeZone :NSTimeZone
-  :param: locale :NSLocale
-  :returns: [String: NSDateFormatter] Singleton array of NSDateFormatters
+  - parameter dateStyle: :NSDateFormatterStyle
+  - parameter timeStyle: :NSDateFormatterStyle
+  - parameter doesRelativeDateFormatting: :Bool
+  - parameter timeZone: :NSTimeZone
+  - parameter locale: :NSLocale
+  - returns: [String: NSDateFormatter] Singleton array of NSDateFormatters
   */
-  private class func formatter(#dateStyle: NSDateFormatterStyle, timeStyle: NSDateFormatterStyle, doesRelativeDateFormatting: Bool, timeZone: NSTimeZone = NSTimeZone.localTimeZone(), locale: NSLocale = NSLocale.currentLocale()) -> NSDateFormatter {
+  private class func formatter(dateStyle dateStyle: NSDateFormatterStyle, timeStyle: NSDateFormatterStyle, doesRelativeDateFormatting: Bool, timeZone: NSTimeZone = NSTimeZone.localTimeZone(), locale: NSLocale = NSLocale.currentLocale()) -> NSDateFormatter {
     var formatters = NSDate.sharedDateFormatters()
     let hashKey = "\(dateStyle.hashValue)\(timeStyle.hashValue)\(doesRelativeDateFormatting.hashValue)\(timeZone.hashValue)\(locale.hashValue)"
     if let cachedDateFormatter = formatters[hashKey] {

@@ -39,7 +39,7 @@ public class Query {
     }
     
     internal func clone() -> Self {
-        var other = self.dynamicType(context: self.context, entityName: self.entityName)
+        let other = self.dynamicType.init(context: self.context, entityName: self.entityName)
         
         other.offset = self.offset
         other.limit = self.limit
@@ -52,7 +52,13 @@ public class Query {
     
     internal func executeFetchRequest(fetchRequest: NSFetchRequest) -> [AnyObject]? {
         var executeFetchRequestError: NSError? = nil
-        let objects = self.context.executeFetchRequest(fetchRequest, error: &executeFetchRequestError)
+        let objects: [AnyObject]?
+        do {
+            objects = try self.context.executeFetchRequest(fetchRequest)
+        } catch let error as NSError {
+            executeFetchRequestError = error
+            objects = nil
+        }
         
         return objects
     }
@@ -177,22 +183,22 @@ extension Query {
         return self.filterBy(predicate: predicate)
     }
     
-    public func filterBy(#predicateFormat: String, argumentArray arguments: [AnyObject]?) -> Self {
+    public func filterBy(predicateFormat predicateFormat: String, argumentArray arguments: [AnyObject]?) -> Self {
         let predicate = NSPredicate(format: predicateFormat, argumentArray: arguments)
         return self.filterBy(predicate: predicate)
     }
     
-    public func filterBy(#predicateFormat: String, arguments: AnyObject...) -> Self {
+    public func filterBy(predicateFormat predicateFormat: String, arguments: AnyObject...) -> Self {
         let predicate = NSPredicate(format: predicateFormat, argumentArray: arguments)
         return self.filterBy(predicate: predicate)
     }
     
-    public func filterBy(#predicateFormat: String, arguments: CVaListPointer) -> Self {
+    public func filterBy(predicateFormat predicateFormat: String, arguments: CVaListPointer) -> Self {
         let predicate = NSPredicate(format: predicateFormat, arguments: arguments)
         return self.filterBy(predicate: predicate)
     }
     
-    public func filterBy(#predicate: NSPredicate) -> Self {
+    public func filterBy(predicate predicate: NSPredicate) -> Self {
         let clone = self.clone()
         
         if clone.predicate == nil {

@@ -53,7 +53,7 @@ public class Attribute<T> {
             return ContextOptions.stringComparisonPredicateOptions
         }
         else {
-            return NSComparisonPredicateOptions.allZeros
+            return NSComparisonPredicateOptions()
         }
     }
     
@@ -287,7 +287,7 @@ public func ~=<T>(left: Attribute<T>, right: T) -> NSComparisonPredicate {
 }
 
 public func <<<T>(left: Attribute<T>, right: [T]) -> NSComparisonPredicate {
-    let rightValue = map(right) { toAnyObject($0) }
+    let rightValue = right.map { toAnyObject($0) }
     let rightExpression = NSExpression(forConstantValue: rightValue)
     
     return NSComparisonPredicate(

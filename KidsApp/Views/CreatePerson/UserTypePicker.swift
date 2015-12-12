@@ -35,7 +35,7 @@ class UserTypePicker: UIView {
     xibSetup()
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     xibSetup()
   }
@@ -49,7 +49,7 @@ class UserTypePicker: UIView {
     
     view.frame = bounds
     
-    view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+    view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
     
     addSubview(view)
     

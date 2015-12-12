@@ -94,7 +94,7 @@ class AvatarCollectionViewController: UICollectionViewController {
   // MARK: - Private
   
   func closeController(sender: AnyObject) {
-    println(sender)
+    print(sender)
     /*
     if (sender.state == UIGestureRecognizerStateEnded)
     {

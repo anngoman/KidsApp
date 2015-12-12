@@ -43,7 +43,7 @@ class ThirdStepViewController: UIViewController {
     let optionMenu = UIAlertController(title: "Загрузка аватара", message: "Выберите вариант", preferredStyle: .Alert)
     
     let libraryAction = UIAlertAction(title: "Открыть галерию", style: .Default, handler: {
-      (alert: UIAlertAction!) -> Void in
+      (alert: UIAlertAction) -> Void in
       self.imagePicker.allowsEditing = false
       self.imagePicker.sourceType = .PhotoLibrary
       self.presentViewController(self.imagePicker, animated: true, completion: nil)
@@ -52,7 +52,7 @@ class ThirdStepViewController: UIViewController {
     
     if UIImagePickerController.isSourceTypeAvailable(.Camera) {
       let photoAction = UIAlertAction(title: "Сделать фото", style: .Default, handler: {
-        (alert: UIAlertAction!) -> Void in
+        (alert: UIAlertAction) -> Void in
         self.imagePicker.allowsEditing = false
         self.imagePicker.sourceType = .Camera
         self.presentViewController(self.imagePicker, animated: true, completion: nil)
@@ -90,7 +90,7 @@ extension ThirdStepViewController: UIImagePickerControllerDelegate, UINavigation
   
   // MARK: - UIImagePickerControllerDelegate Methods
   
-  func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+  func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
     if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
       if let user = DataStore.sharedDataStore.newUser {
         let size = min(pickedImage.size.width, pickedImage.size.height)

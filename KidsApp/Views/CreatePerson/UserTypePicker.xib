@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserTypePicker" customModule="KidsApp" customModuleProvider="target">
@@ -13,11 +14,12 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="-1" y="0.0" width="596" height="200"/>
+            <rect key="frame" x="0.0" y="0.0" width="596" height="200"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KAb-dK-yoi" userLabel="second" customClass="PersonButton" customModule="KidsApp" customModuleProvider="target">
                     <rect key="frame" x="223" y="0.0" width="150" height="200"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="MkP-C9-K58"/>
                         <constraint firstAttribute="width" constant="150" id="XZe-NK-aXu"/>
@@ -41,6 +43,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="dmT-8X-kyY" userLabel="first" customClass="PersonButton" customModule="KidsApp" customModuleProvider="target">
                     <rect key="frame" x="33" y="0.0" width="150" height="200"/>
+                    <animations/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-MediumItalic" family="Helvetica Neue" pointSize="19"/>
                     <inset key="titleEdgeInsets" minX="-280" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="50"/>
@@ -57,6 +60,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oZN-bB-cla" userLabel="third" customClass="PersonButton" customModule="KidsApp" customModuleProvider="target">
                     <rect key="frame" x="413" y="0.0" width="150" height="200"/>
+                    <animations/>
                     <inset key="titleEdgeInsets" minX="-280" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="50"/>
                     <state key="normal" image="icon">
@@ -75,6 +79,7 @@
                     </connections>
                 </button>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="oZN-bB-cla" firstAttribute="height" secondItem="KAb-dK-yoi" secondAttribute="height" id="CnG-wx-mXQ"/>

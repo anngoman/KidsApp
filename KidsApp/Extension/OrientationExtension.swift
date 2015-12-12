@@ -15,8 +15,8 @@ extension UINavigationController {
     return true
   }
   
-  public override func supportedInterfaceOrientations() -> Int {
-    return Int(UIInterfaceOrientationMask.Landscape.rawValue)
+  public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+    return UIInterfaceOrientationMask.Landscape
   }
   
 }
@@ -27,8 +27,8 @@ extension UIImagePickerController {
     return true
   }
   
-  public override func supportedInterfaceOrientations() -> Int {
-    return Int(UIInterfaceOrientationMask.Landscape.rawValue)
+  public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+    return UIInterfaceOrientationMask.Landscape
   }
 
 }

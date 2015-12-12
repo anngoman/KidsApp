@@ -32,7 +32,7 @@ public final class FetchAsyncHandler: NSObject {
     internal var asynchronousFetchResult: NSAsynchronousFetchResult? {
         didSet {
             if let asynchronousFetchResult = self.asynchronousFetchResult {
-                asynchronousFetchResult.addObserver(self, forKeyPath: "progress", options: (.Initial | .New), context: nil)
+                asynchronousFetchResult.addObserver(self, forKeyPath: "progress", options: ([.Initial, .New]), context: nil)
             }
         }
     }
@@ -53,12 +53,12 @@ public final class FetchAsyncHandler: NSObject {
         self.cancelled = true
     }
     
-    public override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if let asynchronousFetchResult = self.asynchronousFetchResult where asynchronousFetchResult == object as! NSObject {
             if keyPath == "progress" {
                 if let progress = change[NSKeyValueChangeNewKey] as? NSProgress {
                     if self.fractionCompletedObserverAdded == false {
-                        progress.addObserver(self, forKeyPath: "fractionCompleted", options: (.Initial | .New), context: nil)
+                        progress.addObserver(self, forKeyPath: "fractionCompleted", options: ([.Initial, .New]), context: nil)
                         self.fractionCompletedObserverAdded = true
                     }
                 }

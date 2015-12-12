@@ -17,7 +17,7 @@ public class Context: ChildContext {
     // This will be removed in the next major version.
 
     private lazy var _defaultBackgroundContext: NSManagedObjectContext = {
-        return self.dynamicType(parentContext: self)
+        return self.dynamicType.init(parentContext: self)
     }()
     
     private func defaultCreatedBackgroundContext() -> Self {
@@ -42,7 +42,7 @@ public class Context: ChildContext {
         self.undoManager = nil
     }
 
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -66,7 +66,7 @@ public class BaseContext: NSManagedObjectContext {
         self.addObservers()
     }
 
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -78,7 +78,14 @@ public class BaseContext: NSManagedObjectContext {
     
     public func save() -> (success: Bool, error: NSError?) {
         var error: NSError? = nil
-        let success = self.save(&error)
+        let success: Bool
+        do {
+            try self.save()
+            success = true
+        } catch var error1 as NSError {
+            error = error1
+            success = false
+        }
         
         return (success, error)
     }
@@ -97,7 +104,10 @@ public class BaseContext: NSManagedObjectContext {
         // this context will save
         self.addObserverForName(NSManagedObjectContextWillSaveNotification, object: self) { notification in
             if let notificationContext = notification.object as? NSManagedObjectContext where !notificationContext.insertedObjects.isEmpty {
-                notificationContext.obtainPermanentIDsForObjects(Array(notificationContext.insertedObjects), error: nil)
+                do {
+                    try notificationContext.obtainPermanentIDsForObjects(Array(notificationContext.insertedObjects))
+                } catch _ {
+                }
             }
         }
     }
@@ -134,7 +144,7 @@ public class RootSavingContext: BaseContext {
         self.assignPersistentStoreCoordinator()
     }
 
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -151,9 +161,14 @@ public class RootSavingContext: BaseContext {
                     let containerURL = persistentStoreURL.URLByDeletingLastPathComponent {
                         // if the directory does not exist, it will be created
                         var fileManagerError: NSError? = nil
-                        if NSFileManager.defaultManager().createDirectoryAtURL(containerURL, withIntermediateDirectories: true, attributes: nil, error: &fileManagerError) {
+                        do {
+                            try NSFileManager.defaultManager().createDirectoryAtURL(containerURL, withIntermediateDirectories: true, attributes: nil)
                             var error: NSError? = nil
-                            persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: self.contextOptions.configuration, URL: persistentStoreURL, options: self.contextOptions.options as [NSObject : AnyObject], error: &error)
+                            do {
+                                try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: self.contextOptions.configuration, URL: persistentStoreURL, options: self.contextOptions.options as [NSObject : AnyObject])
+                            } catch var error1 as NSError {
+                                error = error1
+                            }
                             
                             if let error = error {
                                 var handled = false
@@ -161,7 +176,7 @@ public class RootSavingContext: BaseContext {
                                 if error.domain == NSCocoaErrorDomain {
                                     let migrationErrorCodes = [NSPersistentStoreIncompatibleVersionHashError, NSMigrationMissingSourceModelError, NSMigrationError]
                                     
-                                    if contains(migrationErrorCodes, error.code) {
+                                    if migrationErrorCodes.contains(error.code) {
                                         handled = self.handleMigrationError(error)
                                     }
                                 }
@@ -170,8 +185,8 @@ public class RootSavingContext: BaseContext {
                                     return
                                 }
                             }
-                        }
-                        else {
+                        } catch var error as NSError {
+                            fileManagerError = error
                             return
                         }
                         
@@ -183,7 +198,11 @@ public class RootSavingContext: BaseContext {
                 
             case .InMemory:
                 var error: NSError? = nil
-                persistentStoreCoordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: self.contextOptions.configuration, URL: nil, options: self.contextOptions.options as [NSObject : AnyObject], error: &error)
+                do {
+                    try persistentStoreCoordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: self.contextOptions.configuration, URL: nil, options: self.contextOptions.options as [NSObject : AnyObject])
+                } catch var error1 as NSError {
+                    error = error1
+                }
                 
                 if error != nil {
                     return
@@ -226,26 +245,45 @@ public class ChildContext: BaseContext {
         self.parentContext = self.rootSavingContext
     }
 
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - public overrided methods
 
-    public override func save(error: NSErrorPointer) -> Bool {
-        if !self.hasChanges { return true }
+    public override func save() throws {
+        var error: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
+        if !self.hasChanges { return }
         
-        var success = super.save(error)
+        var success: Bool
+        do {
+            try super.save()
+            success = true
+        } catch var error1 as NSError {
+            error = error1
+            success = false
+        }
         
         if success {
             self.rootSavingContext.performBlockAndWait {
                 self.enableMergeFromRootSavingContext = false
-                success = self.rootSavingContext.save(error)
+                do {
+                    try self.rootSavingContext.save()
+                    success = true
+                } catch var error1 as NSError {
+                    error.memory = error1
+                    success = false
+                } catch {
+                    fatalError()
+                }
                 self.enableMergeFromRootSavingContext = true
             }
         }
         
-        return success
+        if success {
+            return
+        }
+        throw error
     }
     
     // MARK: - private overrided methods
@@ -299,14 +337,14 @@ extension BaseContext {
         let handler = FetchAsyncHandler(asynchronousFetchRequest: asynchronousFetchRequest)
         
         //
-        var error: NSError? = nil
+        let error: NSError? = nil
         if handler.cancelled {
             completionHandlerCalled = true
             completionHandler(nil, NSError(domain: "com.alecrim.AlecrimCoreData", code: NSUserCancelledError, userInfo: nil))
         }
         else {
             handler.foolProgress.becomeCurrentWithPendingUnitCount(1)
-            handler.asynchronousFetchResult = self.executeRequest(asynchronousFetchRequest, error: &error) as? NSAsynchronousFetchResult
+            handler.asynchronousFetchResult = self.executeRequest(asynchronousFetchRequest) as? NSAsynchronousFetchResult
             handler.foolProgress.resignCurrent()
             
             if error != nil {
@@ -341,9 +379,9 @@ extension BaseContext {
         }
         
         moc.performBlock {
-            var error: NSError? = nil
+            let error: NSError? = nil
             
-            if let batchUpdateResult = moc.executeRequest(batchUpdateRequest, error: &error) as? NSBatchUpdateResult, let count = batchUpdateResult.result as? Int {
+            if let batchUpdateResult = moc.executeRequest(batchUpdateRequest) as? NSBatchUpdateResult, let count = batchUpdateResult.result as? Int {
                 completionHandler(count, nil)
             }
             else {
@@ -368,11 +406,11 @@ public func createBackgroundContext<T: Context>(parentContext: T, usingNewBackgr
 }
 
 public func performInBackground<T: Context>(parentContext: T, closure: (T) -> Void) {
-    performInBackground(parentContext, false, closure)
+    performInBackground(parentContext, usingNewBackgroundManagedObjectContext: false, closure: closure)
 }
 
 public func performInBackground<T: Context>(parentContext: T, usingNewBackgroundManagedObjectContext: Bool, closure: (T) -> Void) {
-    let backgroundContext = createBackgroundContext(parentContext, usingNewBackgroundManagedObjectContext)
+    let backgroundContext = createBackgroundContext(parentContext, usingNewBackgroundManagedObjectContext: usingNewBackgroundManagedObjectContext)
     
     backgroundContext.performBlock {
         closure(backgroundContext)
@@ -394,8 +432,8 @@ internal func alecrimCoreDataHandleError(error: NSError?, filename: String = __F
         let process = NSProcessInfo.processInfo()
         let threadId = NSThread.isMainThread() ? "main" : "background"
         
-        let string = "\(dateFormatter.stringFromDate(NSDate())) \(process.processName) [\(process.processIdentifier):\(threadId)] \(filename.lastPathComponent)(\(line)) \(funcname):\r\t\(error)\n"
-        println(string)
+        let string = "\(dateFormatter.stringFromDate(NSDate())) \(process.processName) [\(process.processIdentifier):\(threadId)] \((filename as NSString).lastPathComponent)(\(line)) \(funcname):\r\t\(error)\n"
+        print(string)
     }
 }
 

@@ -18,9 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     let initialViewController: UIViewController
     if dataStore.users.count > 0 {
-      initialViewController = storyboard.instantiateViewControllerWithIdentifier("MainNavigationVC") as! UIViewController
+      initialViewController = storyboard.instantiateViewControllerWithIdentifier("MainNavigationVC") 
     } else {
-      initialViewController = storyboard.instantiateViewControllerWithIdentifier("CreatePersonVC") as! UIViewController
+      initialViewController = storyboard.instantiateViewControllerWithIdentifier("CreatePersonVC") 
     }
     window?.rootViewController = initialViewController
     window?.makeKeyAndVisible()
@@ -62,8 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
   }
   
-  func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> Int {
-    return Int(UIInterfaceOrientationMask.All.rawValue)
+  func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+    return UIInterfaceOrientationMask.All
   }
   
 }

@@ -23,7 +23,7 @@ private func entityDescriptionFromClass(aClass: AnyClass, context: NSManagedObje
         let persistentStoreCoordinator = context.persistentStoreCoordinator!
         let managedObjectModel = persistentStoreCoordinator.managedObjectModel
         
-        ed = Swift.filter(managedObjectModel.entities, { $0.managedObjectClassName == managedObjectClassName }).first! as! NSEntityDescription
+        ed = managedObjectModel.entities.filter({ $0.managedObjectClassName == managedObjectClassName }).first! 
         cachedEntityDescriptions[managedObjectClassName] = ed
     }
     
@@ -38,14 +38,14 @@ public final class Table<T: NSManagedObject>: Query {
     private var _entityDescription: NSEntityDescription!
     private var entityDescription: NSEntityDescription {
         if self._entityDescription == nil {
-            self._entityDescription = entityDescriptionFromClass(T.self, self.context)
+            self._entityDescription = entityDescriptionFromClass(T.self, context: self.context)
         }
         
         return self._entityDescription
     }
     
     public convenience init(context: Context) {
-        let entityDescription = entityDescriptionFromClass(T.self, context)
+        let entityDescription = entityDescriptionFromClass(T.self, context: context)
         self.init(context: context, entityName: entityDescription.name!)
         self._entityDescription = entityDescription
     }
@@ -87,11 +87,12 @@ extension Table {
     public func deleteEntity(entity: T) -> (success: Bool, error: NSError?) {
         var retrieveExistingObjectError: NSError? = nil
         
-        if let managedObjectInContext = self.context.existingObjectWithID(entity.objectID, error: &retrieveExistingObjectError) {
+        do {
+            let managedObjectInContext = try self.context.existingObjectWithID(entity.objectID)
             self.context.deleteObject(managedObjectInContext)
             return (entity.deleted || entity.managedObjectContext == nil, nil)
-        }
-        else {
+        } catch let error as NSError {
+            retrieveExistingObjectError = error
             return (false, retrieveExistingObjectError)
         }
     }
@@ -116,8 +117,11 @@ extension Table {
             for objectID in objectIDs {
                 var retrieveExistingObjectError: NSError? = nil
 
-                if let object = self.context.existingObjectWithID(objectID, error: &retrieveExistingObjectError) {
+                do {
+                    let object = try self.context.existingObjectWithID(objectID)
                     self.context.deleteObject(object)
+                } catch let error as NSError {
+                    retrieveExistingObjectError = error
                 }
                 
                 if let retrieveExistingObjectError = retrieveExistingObjectError {
@@ -186,9 +190,9 @@ extension Table {
 
     /// Try to find the first entity matching the comparison. If the entity does not exist a new one will be created.
     ///
-    /// :param: predicateClosure A closure with a simple equality comparison between an attribute and a value.
+    /// - parameter predicateClosure: A closure with a simple equality comparison between an attribute and a value.
     ///
-    /// :returns: The found entity or a new entity from the same type (with the attribute filled with the specified value).
+    /// - returns: The found entity or a new entity from the same type (with the attribute filled with the specified value).
     public func firstOrCreated(@noescape predicateClosure: (T.Type) -> NSComparisonPredicate) -> T {
         let predicate = predicateClosure(T.self)
         if let entity = self.filterBy(predicate: predicate).first() {
@@ -298,7 +302,13 @@ extension Table {
         fetchRequest.resultType = NSFetchRequestResultType.DictionaryResultType
         
         var error: NSError? = nil
-        let results = self.context.executeFetchRequest(fetchRequest, error: &error)
+        let results: [AnyObject]?
+        do {
+            results = try self.context.executeFetchRequest(fetchRequest)
+        } catch var error1 as NSError {
+            error = error1
+            results = nil
+        }
         
         let value: AnyObject = (results!.first as! NSDictionary).valueForKey(expressionDescription.name)!
         if let safeValue = value as? U {
@@ -385,7 +395,7 @@ extension Table {
 
     public func toFetchedResultsController<U>(@noescape sectionNameKeyPathClosure: (T.Type) -> Attribute<U>) -> FetchedResultsController<T> {
         let sectionNameKeyPath = sectionNameKeyPathClosure(T.self).___name
-        return self.toFetchedResultsController(sectionNameKeyPath: sectionNameKeyPath, cacheName:
+        return self.toFetchedResultsController(sectionNameKeyPath, cacheName:
             nil)
     }
     
@@ -398,7 +408,14 @@ extension Table {
         
         if performFetch {
             var error: NSError? = nil
-            let success = frc.performFetch(&error)
+            let success: Bool
+            do {
+                try frc.performFetch()
+                success = true
+            } catch let error1 as NSError {
+                error = error1
+                success = false
+            }
         }
         
         return frc
